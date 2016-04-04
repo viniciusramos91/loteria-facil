@@ -1,0 +1,17 @@
+/* 	Universal Selector - Propriedades aplicadas à todos os elementos da página */
+* {
+	/* Conteúdo do elemento (margin, padding, ...) fica contido dentro dele. */
+	box-sizing: border-box;	
+	padding: 0px;
+
+}
+
+/* Tem como alvo dispositivos maiores que 768px */
+@media screen and (min-width: 768px) {
+	
+}
+
+/* Tem como alvo dispositivos menores que 768px */
+@media screen and (max-width: 769px) {
+	
+}

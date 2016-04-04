@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<!-- Compatbilidade com IE -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<!-- Tag responsiva -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- As 3 tags acima devem ser as primeiras -->
+<title></title>
+
+<!-- CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+<link href="css/styles.css" rel="stylesheet" />
+</head>
+
+<h:body>
+	<h:form>
+		<p:growl id="growl" autoUpdate="true" />
+	
+		<center>
+			<header class="loteria-box">
+				<h1>
+					<span class="logo-l">L</span><span class="logo">OTERIA</span> 
+					<span class="logo-f">F</span><span class="logo">ACIL</span>
+				</h1>
+			</header>
+			
+			<hr style="width: 90%;"/>
+			
+			<p:panel styleClass="aposta-box">
+				<header>
+					<span class="aposta-header">Sua Aposta</span>
+				</header>
+			
+				<p:inputText size="2" styleClass="input-aposta" maxlength="2" required="true" requiredMessage="Campo Necessario" value="#{loteriaController.aposta1}"/>
+				<p:inputText size="2" styleClass="input-aposta" maxlength="2" required="true" requiredMessage="Campo Necessario" value="#{loteriaController.aposta2}"/>
+				<p:inputText size="2" styleClass="input-aposta" maxlength="2" required="true" requiredMessage="Campo Necessario" value="#{loteriaController.aposta3}"/>
+				<p:inputText size="2" styleClass="input-aposta" maxlength="2" required="true" requiredMessage="Campo Necessario" value="#{loteriaController.aposta4}"/>
+				<p:inputText size="2" styleClass="input-aposta" maxlength="2" required="true" requiredMessage="Campo Necessario" value="#{loteriaController.aposta5}"/>
+				<p:inputText size="2" styleClass="input-aposta" maxlength="2" required="true" requiredMessage="Campo Necessario" value="#{loteriaController.aposta6}"/>
+				
+				<p:panel rendered="#{loteriaController.dom == null}">
+					<p:outputLabel value="Dados indisponiveis!" />
+				</p:panel>
+				<p:panel rendered="#{loteriaController.dom != null}">
+					<p:commandButton value="Verificar Aposta" action="#{loteriaController.parseHtml()}" update="resultado-panel" styleClass="button parse-btn margin-padding-10"/>
+				</p:panel>
+			</p:panel>
+			
+			<br />
+			
+			<p:panel id="resultado-panel" styleClass="loteria-box gray-border" rendered="#{loteriaController.dadosMegasenaProntos}">
+				<header class="resultado-header">
+					Resultado
+				</header>
+				
+				<p:panel rendered="#{loteriaController.acertos lt 4}">
+					menos de 4 acertos
+				</p:panel>
+				
+				<p:panel rendered="#{loteriaController.acertos == 4}">
+					4 acertos
+				</p:panel>
+				
+				<p:panel rendered="#{loteriaController.acertos == 5}">
+					5 acertos
+				</p:panel>
+				
+				<p:panel rendered="#{loteriaController.acertos == 6}">
+					6 acertos
+				</p:panel>
+				
+				<p:panelGrid columns="2">
+					<span class="bold">Id: </span> <span>#{loteriaController.dadosMegasena.id}</span> <br />
+					<span class="bold">Estimativa do Proximo Concurso: </span> <span>#{loteriaController.dadosMegasena.estimativaProximoConcurso}</span> <br />
+				</p:panelGrid>
+			</p:panel>
+		</center>
+	</h:form>
+
+	<!-- JavaScript -->
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/script.js"></script>
+</h:body>
+</html>
